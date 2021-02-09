@@ -1,0 +1,187 @@
+Profiles:
+    TwoOrgsChannel:
+        Consortium: SampleConsortium
+        Application:
+            Organizations:
+                - Name: Org1MSP
+                  ID: Org1MSP
+                  MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
+                  MSPType: ""
+                  Policies:
+                    Admins:
+                        Type: Signature
+                        Rule: OR('Org1MSP.admin')
+                    Readers:
+                        Type: Signature
+                        Rule: OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')
+                    Writers:
+                        Type: Signature
+                        Rule: OR('Org1MSP.admin', 'Org1MSP.client')
+                  AnchorPeers:
+                    - Host: peer0.org1.example.com
+                      Port: 7051
+                  OrdererEndpoints: []
+                  AdminPrincipal: ""
+                - Name: Org2MSP
+                  ID: Org2MSP
+                  MSPDir: crypto-config/peerOrganizations/org2.example.com/msp
+                  MSPType: ""
+                  Policies:
+                    Admins:
+                        Type: Signature
+                        Rule: OR('Org2MSP.admin')
+                    Readers:
+                        Type: Signature
+                        Rule: OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')
+                    Writers:
+                        Type: Signature
+                        Rule: OR('Org2MSP.admin', 'Org2MSP.client')
+                  AnchorPeers:
+                    - Host: peer0.org2.example.com
+                      Port: 9051
+                  OrdererEndpoints: []
+                  AdminPrincipal: ""
+            Capabilities:
+                V1_1: false
+                V1_2: false
+                V1_3: false
+                V1_4_2: true
+            Resources: null
+            Policies:
+                Admins:
+                    Type: ImplicitMeta
+                    Rule: MAJORITY Admins
+                Readers:
+                    Type: ImplicitMeta
+                    Rule: ANY Readers
+                Writers:
+                    Type: ImplicitMeta
+                    Rule: ANY Writers
+            ACLs: {}
+        Orderer: null
+        Consortiums: {}
+        Capabilities:
+            V1_1: false
+            V1_3: false
+            V1_4_3: true
+        Policies:
+            Admins:
+                Type: ImplicitMeta
+                Rule: MAJORITY Admins
+            Readers:
+                Type: ImplicitMeta
+                Rule: ANY Readers
+            Writers:
+                Type: ImplicitMeta
+                Rule: ANY Writers
+    TwoOrgsOrdererGenesis:
+        Consortium: ""
+        Application: null
+        Orderer:
+            OrdererType: solo
+            Addresses:
+                - orderer.example.com:7050
+            BatchTimeout: 2s
+            BatchSize:
+                MaxMessageCount: 10
+                AbsoluteMaxBytes: 10485760
+                PreferredMaxBytes: 524288
+            Kafka:
+                Brokers: []
+            EtcdRaft: null
+            Organizations:
+                - Name: OrdererOrg
+                  ID: OrdererMSP
+                  MSPDir: crypto-config/ordererOrganizations/example.com/msp
+                  MSPType: ""
+                  Policies:
+                    Admins:
+                        Type: Signature
+                        Rule: OR('OrdererMSP.admin')
+                    Readers:
+                        Type: Signature
+                        Rule: OR('OrdererMSP.member')
+                    Writers:
+                        Type: Signature
+                        Rule: OR('OrdererMSP.member')
+                  AnchorPeers: []
+                  OrdererEndpoints: []
+                  AdminPrincipal: ""
+            MaxChannels: 0
+            Capabilities:
+                V1_1: false
+                V1_4_2: true
+            Policies:
+                Admins:
+                    Type: ImplicitMeta
+                    Rule: MAJORITY Admins
+                BlockValidation:
+                    Type: ImplicitMeta
+                    Rule: ANY Writers
+                Readers:
+                    Type: ImplicitMeta
+                    Rule: ANY Readers
+                Writers:
+                    Type: ImplicitMeta
+                    Rule: ANY Writers
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - Name: Org1MSP
+                      ID: Org1MSP
+                      MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
+                      MSPType: ""
+                      Policies:
+                        Admins:
+                            Type: Signature
+                            Rule: OR('Org1MSP.admin')
+                        Readers:
+                            Type: Signature
+                            Rule: OR('Org1MSP.admin', 'Org1MSP.peer', 'Org1MSP.client')
+                        Writers:
+                            Type: Signature
+                            Rule: OR('Org1MSP.admin', 'Org1MSP.client')
+                      AnchorPeers:
+                        - Host: peer0.org1.example.com
+                          Port: 7051
+                      OrdererEndpoints: []
+                      AdminPrincipal: ""
+                    - Name: Org2MSP
+                      ID: Org2MSP
+                      MSPDir: crypto-config/peerOrganizations/org2.example.com/msp
+                      MSPType: ""
+                      Policies:
+                        Admins:
+                            Type: Signature
+                            Rule: OR('Org2MSP.admin')
+                        Readers:
+                            Type: Signature
+                            Rule: OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')
+                        Writers:
+                            Type: Signature
+                            Rule: OR('Org2MSP.admin', 'Org2MSP.client')
+                      AnchorPeers:
+                        - Host: peer0.org2.example.com
+                          Port: 9051
+                      OrdererEndpoints: []
+                      AdminPrincipal: ""
+        Capabilities:
+            V1_1: false
+            V1_3: false
+            V1_4_3: true
+        Policies:
+            Admins:
+                Type: ImplicitMeta
+                Rule: MAJORITY Admins
+            Readers:
+                Type: ImplicitMeta
+                Rule: ANY Readers
+            Writers:
+                Type: ImplicitMeta
+                Rule: ANY Writers
+Organizations: []
+Channel: null
+Application: null
+Orderer: null
+Capabilities: {}
+Resources: null
